@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Simplest Demo</title>
+</head>
+
+<body>
+    <div id="demo">
+        <label id="lbl">Hello World</label>
+        <input id="input" type="text" placeholder="请输入文本">
+    </div>
+    <script>
+        var data = {
+            text: 'Hello World'
+        };
+
+        document.onreadystatechange = function() {
+            if (document.readyState === 'complete') {
+                var input = document.getElementById('input'),
+                    label = document.getElementById('lbl');
+
+                Object.defineProperty(data, 'text', {
+                    set: function(val) {
+                        label.innerText = val;
+                        input.value = val; // This won't trigger 'change' event.
+                    }
+                });
+
+                input.addEventListener('change', function() {
+                    data.text = input.value;
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>
